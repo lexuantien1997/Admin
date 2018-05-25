@@ -1,4 +1,44 @@
+
+<?php 
+    session_start();
+    
+    // if user click sign in
+    if(isset($_POST["btnSignIn"])) 
+    {        
+        // add file php
+        include("../php/database.php");
+        
+        // check connect php
+        $dtb = new database();
+
+        // Get data
+        $username = $_POST["username"];
+        $pass = $_POST["password"];
+
+        $query = "SELECT * FROM `nhanvien` WHERE TENDANGNHAP = ? and MATKHAU = ?";
+
+        // add parameter 
+        $param = array ($username,$pass);
+        // add query
+        $dtb->setQuery($query);
+        // get employer in database
+        $employer =  $dtb->loadRow($param);
+        
+        if(!$employer){
+            // show data
+        }
+
+        $_SESSION["user login"] = $employer;
+
+        // print_r($_SESSION["user login"]); // Log data 
+
+    }
+    
+?>
+
 <!DOCTYPE html>
+
+
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
 Version: 4.7.1
@@ -58,7 +98,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="login-content">
                         <h1>My Mart Admin</h1>
                         <p> This is my  admin page. Manage every thing in back end such as: Order, Product edit, ... </p>
-                        <form action="javascript:;" class="login-form" method="post">
+                        <form  class="login-form" method="post">
                             <div class="alert alert-danger display-hide">
                                 <button class="close" data-close="alert"></button>
                                 <span>Enter any username and password. </span>
@@ -80,7 +120,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="forgot-password">
                                         <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
                                     </div>
-                                    <button class="btn blue" type="submit">Sign In</button>
+                                    <button class="btn blue" type="submit" name="btnSignIn" >Sign In</button>
                                 </div>
                             </div>
                         </form>
@@ -162,4 +202,4 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END THEME LAYOUT SCRIPTS -->
     </body>
 
-</html>
+</html>S
