@@ -1,5 +1,6 @@
 
 <?php 
+    // start session
     session_start();
     
     // if user click sign in
@@ -10,7 +11,7 @@
         
         // check connect php
         $dtb = new database();
-
+        
         // Get data
         $username = $_POST["username"];
         $pass = $_POST["password"];
@@ -25,13 +26,19 @@
         $employer =  $dtb->loadRow($param);
         
         if(!$employer){
-            // show data
+            // Log data error
+            echo "NULL";
+        } else {
+            // add data 2 session
+            $_SESSION["user_login"] = $employer;    
+
+            echo $_SESSION["user_login"]["TENNV"];
+           // print_r($_SESSION["user_login"]);
+            // navigate 2 index.html
+            header("Location: index.html");
+
+            $dtb->disconnect(); // close connection
         }
-
-        $_SESSION["user login"] = $employer;
-
-        // print_r($_SESSION["user login"]); // Log data 
-
     }
     
 ?>
@@ -105,9 +112,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Username" name="username" required/> </div>
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Username" name="username" required/>shinigami</div>
                                 <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password" name="password" required/> </div>
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password" name="password" required/>15520884</div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">

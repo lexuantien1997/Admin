@@ -73,7 +73,7 @@ class database
             if(!$result = $this->execute($option))
                 return false;
         }
-        return $result->fetch(PDO::FETCH_OBJ);
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
     
     //Function count the record on the table
